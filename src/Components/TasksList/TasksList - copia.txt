@@ -1,0 +1,106 @@
+import {Table, Button,Modal, InputGroup, FormControl} from "react-bootstrap";
+import {Tasks} from "../Tasks/Tasks";
+import {useState} from "react";
+
+const TasksList = ({tasks,deletetask}) => {
+    /*
+                    <td> <Button variant="danger" size="lg" onClick={() => handleShow(item)}>
+                    Eliminar
+                    </Button>
+                </td>
+    */            
+   const[ show, setShow] = useState(false);
+
+    const [tarea,setTarea]= useState([]);
+
+    const deleteTask = (idTarea) =>{
+        console.log(idTarea);
+        deletetask(idTarea);
+    }
+
+    const updateTask = (tarea) =>{
+        console.log("updateTask, idTarea=", tarea.idTarea);
+    }
+
+    const handleShow = (task) =>{
+        console.log(task);
+        setShow(true);
+        setTarea(task)
+    }
+
+    const handleClose =() =>{
+        setShow(false);
+    }
+
+               
+    return (
+        <div>
+        <Table>
+            <thead>
+                <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Prioridad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {tasks?.length>0 && tasks.map((task) => 
+                <tr key={task.idTarea}>
+                <td>{task.nombre}</td>
+                <td>{task.descripcion}</td>
+                <td>{task.prioridad}</td>
+                <td> <Button variant="danger" size="lg" onClick={() => deleteTask(task.idTarea)}>
+                    Eliminar
+                    </Button>
+                </td>     
+                <td> <Button variant="primary" size="lg" onClick={() => handleShow(task)}>
+                    Editar
+                    </Button>
+                </td>                
+                </tr>
+                )}        
+            </tbody>
+        </Table>
+
+        <Modal show={show} onHide={handleClose} tarea={tarea}>
+                <Modal.Header>
+                <Modal.Title>Tareas</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Desea Eliminar la tarea {tarea.nombre}?
+                    <InputGroup size="sm" className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-sm" >Nombre</InputGroup.Text>
+                        <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" defaultValue={tarea.nombre}/>
+                    </InputGroup>
+
+                    <InputGroup size="sm" className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-sm">Descripcion</InputGroup.Text>
+                        <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" defaultValue={tarea.descripcion}/>
+                    </InputGroup>
+
+                    <InputGroup size="sm" className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-sm">Prioridad</InputGroup.Text>
+                        <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" defaultValue={tarea.prioridad} />
+                    </InputGroup>
+
+                    <InputGroup size="sm" className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-sm">IdTarea</InputGroup.Text>
+                        <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" defaultValue={tarea.idTarea} />
+                    </InputGroup>
+
+                </Modal.Body>
+                    
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Cerrar
+                </Button>
+                <Button variant="primary" onClick={updateTask(tarea)}>
+                    Grabar
+                </Button>
+                </Modal.Footer>
+        </Modal>
+        </div>
+    );
+
+}
+ 
+export default TasksList;
