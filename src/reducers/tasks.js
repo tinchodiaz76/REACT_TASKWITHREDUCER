@@ -32,11 +32,20 @@ export const  tasksReducers = (state, action) => {
         //EL reducer no muta dato, y siempre debe devolver algo
     // {action: SET_TASK, payload : {task : {id, name, description}}
         case SET_TASK: {
+          const currentCount = state.tasks.length+1;
+          const task = {...action.payload.task,idTarea:currentCount};
 
+          return {
+            ...state,
+            tasks: [...state.tasks,task],
+            };
+
+          /*
           return {
             ...state,
             tasks: [...state.tasks,action.payload.task],
             };
+          */            
         }
 
         case UPDATE_TASK: {

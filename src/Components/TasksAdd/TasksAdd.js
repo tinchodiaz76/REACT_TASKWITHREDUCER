@@ -14,18 +14,10 @@ const TasksAdd = ({addtask}) => {
         addtask(task);
 
     };
-/*
-    const deletetasks= (maty) => {
 
-        dispatch({
-            type: DELETE_TASK,
-            //payload: {maty}
-            payload: {idTarea :1}
-        })
-    };
-*/
     return (  
         <form onSubmit={handleSubmit(agregarTarea)}>
+            <h1>Loco</h1>
             <label>
                 Nombre de la Tarea:
                 <input {...register("nombre", { required: true ,  minLength: 2})} placeholder="Nombre de la Tarea..." />
@@ -52,13 +44,13 @@ const TasksAdd = ({addtask}) => {
             <br></br>
 
             <label>
-                ID de la Tarea a BORRAR:
+                ID de la Tarea:
                 <input {...register("idTarea")} placeholder="ID de la Tarea...." />
             </label>
 
             <br></br>
 
-            <button type="submit">Agregar tarea</button>
+            <button type="submit" name="grabar">Agregar tarea</button>
         </form>
 
     );
