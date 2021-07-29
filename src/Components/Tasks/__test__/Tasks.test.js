@@ -4,7 +4,7 @@ import Tasks from "../../Tasks";
 
 describe("Tasks", () => {    
     test('Agrega una Tarea u verifica si anda', () => {
-        const {utils, getByText, getByPlaceholderText} = render(<Tasks />)
+        const {getByText, getByPlaceholderText} = render(<Tasks />)
         const inputNombre = getByPlaceholderText("Nombre de la Tarea...");
         fireEvent.change(inputNombre, {target: {value: 'Planchar'}});
         
